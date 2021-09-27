@@ -1,11 +1,84 @@
-# Start your own "Can of Books" App
+# Can-Of-Books
 
-This repository has starter code to begin work on creating your own online bookshelf.
+GitHub Repo: https://github.com/CodeFellows-301/city-explorer/pulls?q=is%3Apr+is%3Aclosed
+**Author**: Jacob Gregor & Dario Vitorte
+**Version**: 1.0.1
 
-## What can books do?
+## Overview
 
-Books are life-changing. They have the power to enlighten, educate, entertain, heal, and help us grow. Build out this code base to create an web app to track what books have impacted you, and what's recommended to read next.
+Can-Of-Books is a lab that i have no clue what we will be doing just yet. This will be updated later.
 
-## Use this template
+## Getting Started
 
-Clone this repo to your own account with the green "Use this template" button. Then, add any collaborators. Now you are ready to start adding features! Deploy your site to let the world know which books have had the greatest impact on you, and what's recommended. Enjoy!
+To get access to the following repository follow this address:
+Deployed Site: [Post link here]
+Create a fork and save to your localhost.
+-> **Important** run npm install (unless Node.js already imnstalled)
+-> open the source code and run the following terminal command "npm start"
+-> you site should now spin up.
+
+## Architecture
+
+Javascript
+React
+Node.js
+Axios
+
+## Change Log
+
+Lab-06:
+
+01-01-2001 10:15pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+
+## Credit and Collaborations
+
+Lab-06:
+Server data mapping => Eddie Ponce & Anthony Morton
+
+Name of feature: Repo setup
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 2:45
+
+Finish time:
+
+Actual time needed to complete:
+
+---
+
+Name of feature:
+
+Estimate of time needed to complete:
+
+Start time:
+
+Finish time:
+
+Actual time needed to complete:
+
+---
+
+Name of feature:
+
+Estimate of time needed to complete:
+
+Start time:
+
+Finish time: 9:30
+
+Actual time needed to complete: 2 hours
+
+---
+
+Name of feature: Errors
+
+Estimate of time needed to complete: 30 minutes
+
+Start time: 9:30
+
+Finish time: 10:15
+
+Actual time needed to complete: 45 minutes
+
+---
