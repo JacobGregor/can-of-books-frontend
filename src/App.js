@@ -15,17 +15,29 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      user: null,
+      email: null,
+      user: false,
+      
     }
+    console.log(this.state.user)
   }
 
-  loginHandler = (email) => {
+  emailHandler = (event) => {
     this.setState({
-      email: email,
+      email: event,
       user: true
     })
+    console.log(this.state.email)
   }
+  loginHandler = (event) => {
+    event.preventDefault()
+    this.setState({
+      user: true
+    })
+    console.log(this.state.user)
+    console.log(this.state.email)
+  }
+
 
   logoutHandler = () => {
     this.setState({
@@ -40,9 +52,9 @@ class App extends React.Component {
           <Header user={this.state.user} onLogout={this.logoutHandler} />
           <Switch>
             <Route exact path="/">
-              {/* <LoginForm loginHandler={this.loginHandler}/> */}
-              <BestBooks user={this.state.email} />
+              <LoginForm loginHandler={this.loginHandler} emailHandler={this.emailHandler}/>
               {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
+              <BestBooks email={this.state.email} />
             </Route>
             {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
           </Switch>

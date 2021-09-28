@@ -13,7 +13,6 @@ class BestBooks extends React.Component {
   
 componentDidMount(){
   this.fetchBooks()
-  console.log(this.state.books)
 }
 
 
@@ -33,19 +32,23 @@ async fetchBooks(){
   render() {
     return (
       <>
-       {this.state.books ? this.state.books.map((data,index) =>{
-         return(
         <Carousel>
-        <Carousel.Item key={index}>
-         <h1>{data.title}</h1>
+       {this.state.books ? this.state.books.map((data,index) =>(
+         <Carousel.Item key={index}>
+          <img
+            className="d-block w-100"
+            src="https://cdn.pixabay.com/photo/2016/02/23/07/37/wall-1217083_1280.jpg"
+            alt={data.title}
+            />
           <Carousel.Caption>
+            <h1>{data.title}</h1>
             <h3>{data.description}</h3>
             <p>{data.status}</p>
           </Carousel.Caption>
         </Carousel.Item>
-        </Carousel>
          )
-       }) : <h1>Sorry No Books Available!</h1> };
+         ) : <h1>Sorry No Books Available!</h1> }
+         </Carousel>
       </>
     )
   }
