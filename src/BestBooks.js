@@ -1,28 +1,51 @@
 import React from 'react';
+import axios from 'axios'
+import Carousel from 'react-bootstrap/Carousel'
+let server = `${process.env.REACT_APP_SERVER}`
 
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: []
+      books: [],
     }
   }
+  
+componentDidMount(){
+  this.fetchBooks()
+  console.log(this.state.books)
+}
 
-  /* TODO: Make a GET request to your API to fetch books for the logged in user  */
+
+async fetchBooks(){
+  let url = `${server}/books`
+  if (this.props.email){
+    url += `?email=${this.props.email}`
+  } 
+  try {
+    const response = await axios.get(url);
+    this.setState({ books: response.data})
+  } catch{
+
+  }
+};
 
   render() {
-
-    /* TODO: render user's books in a Carousel */
-
     return (
       <>
-        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-
-        {this.state.books.length ? (
-          <p>Book Carousel coming soon</p>
-        ) : (
-          <h3>No Books Found :(</h3>
-        )}
+       {this.state.books ? this.state.books.map((data,index) =>{
+         return(
+        <Carousel>
+        <Carousel.Item key={index}>
+         <h1>{data.title}</h1>
+          <Carousel.Caption>
+            <h3>{data.description}</h3>
+            <p>{data.status}</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        </Carousel>
+         )
+       }) : <h1>Sorry No Books Available!</h1> };
       </>
     )
   }

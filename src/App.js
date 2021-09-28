@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import BestBooks from './BestBooks'
+import LoginForm from './LoginForm'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
@@ -13,13 +15,15 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      email: '',
       user: null,
     }
   }
 
-  loginHandler = (user) => {
+  loginHandler = (email) => {
     this.setState({
-      user,
+      email: email,
+      user: true
     })
   }
 
@@ -36,6 +40,8 @@ class App extends React.Component {
           <Header user={this.state.user} onLogout={this.logoutHandler} />
           <Switch>
             <Route exact path="/">
+              {/* <LoginForm loginHandler={this.loginHandler}/> */}
+              <BestBooks user={this.state.email} />
               {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
             </Route>
             {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
