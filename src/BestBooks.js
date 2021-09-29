@@ -1,39 +1,33 @@
 import React from 'react';
-import axios from 'axios'
 import Carousel from 'react-bootstrap/Carousel'
-let server = `${process.env.REACT_APP_SERVER}`
 
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: [],
     }
   }
-  
-componentDidMount(){
-  this.fetchBooks()
-}
 
 
-async fetchBooks(){
-  let url = `${server}/books`
-  if (this.props.email){
-    url += `?email=${this.props.email}`
-  } 
-  try {
-    const response = await axios.get(url);
-    this.setState({ books: response.data})
-  } catch{
 
-  }
-};
+// async fetchBooks(){
+//   let url = `${server}/books`
+//   if (this.props.email){
+//     url += `?email=${this.props.email}`
+//   } 
+//   try {
+//     const response = await axios.get(url);
+//     this.setState({ books: response.data})
+//   } catch{
+
+//   }
+// };
 
   render() {
     return (
       <>
         <Carousel>
-       {this.state.books ? this.state.books.map((data,index) =>(
+       {this.props.booksData ? this.props.booksData.map((data,index) =>(
          <Carousel.Item key={index}>
           <img
             className="d-block w-100"
