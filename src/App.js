@@ -2,70 +2,52 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import BestBooks from './BestBooks'
-import LoginForm from './LoginForm'
+// import LoginForm from './LoginForm'
 import BookFormModal from './BookFormModal'
 import Profile from './Profile'
-import Logout from './LogoutButton'
+import UpdateBooks from './UpdateBooks'
 import Login from './Login'
-import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
 } from "react-router-dom";
-let server = `${process.env.REACT_APP_SERVER}`
+
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      user: false,
-      books: [],
-      
+      user: undefined,
     }
-    console.log(this.state.user)
   }
 
-componentDidMount(){
-  this.fetchBooks()
-}
-
-
-async fetchBooks(){
-  let url = `${server}/books`
-  console.log(this.state.email);
-  // if (this.state.email){
-    // url += `?email=${this.state.email}`
-  // } 
-  try {
-    const response = await axios.get(url);
-    console.log(response.data);
-    this.setState({ books: response.data})
-  } catch (error){
-    console.log(error.message)
-  }
-};
-
-  emailHandler = (event) => {
+  async appFetchBooks(){
+    let url = `${server}/books`
+    console.log(this.props.user.email);
+    if (this.props.user.email){
+      url += `?email=${this.props.user.email}`
+    } 
+    try {
+      const response = await axios.get(url);
+      console.log(response.data);
+      this.setState({ books: response.data})
+    } catch (error){
+      console.log(error.message)
+    }
+  };
+ 
+  userHandler = (user) => {
     this.setState({
-      email: event,
-      user: true
+      user: user
     })
   }
-  loginHandler = (event) => {
-    event.preventDefault()
+  logoutHandler = () => {
     this.setState({
-      user: true
+      user: undefined,
     })
-  }
-  loginHandler = () => {
-    this.setState({
-      user: true,
-    })
-    console.log(this.state.user)
   }
 
   render() {
@@ -73,27 +55,19 @@ async fetchBooks(){
     return (
       <>
         <Router>
-          <Header user={this.state.user} onLogout={this.logoutHandler} />
+          <Header />
           <Switch>
-            {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
-            {/* {Need to get the routes sorted out and how to route between pages} */}
-            {/* <Route exact path="/login">
-              <Login user={this.state.user}/>
-            </Route> */}
-            <Route path="/user">
-              {this.state.user ? <LoginForm loginHandler={this.loginHandler} emailHandler={this.emailHandler}/> :
-             <Logout />};
+            {/* Main Route */}
+            <Route exact path="/"> {this.state.user ? ( <BestBooks user={this.state.user} /> ):( <Login user={this.state.user} userHandler={this.userHandler} />)} </Route>
+            {/* Route to User Books */}
+            <Route path="/BestBooks">{this.state.user ?( <BestBooks booksData={this.state.books} /> ):( <Login />)}
             </Route>
-            <Route exact path="/BookFormModal">
-              <BookFormModal fetchBooks={this.fetchBooks}/>
-            </Route>
-            <Route>
-            <BestBooks booksData={this.state.books} email={this.state.email} />
-            </Route>
-            <Route path="/profile">
-            <Profile />
-            </Route>
-            {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
+            {/* Route to NewBook Form */}
+            <Route path="/NewBook">{this.state.user ? <BookFormModal /> : <Login />} </Route>
+            {/* Route to Update Books */}
+            <Route path="/UpdateBook"> {this.state.user ? <UpdateBooks /> : <Login />} </Route>
+            {/* Route to Profile */}
+            <Route path="/profile"> {this.state.user ? (<Profile user={this.state.user} logoutHandler={this.logoutHandler}/> ): (<Login />)} </Route>
           </Switch>
           <Footer />
         </Router>
