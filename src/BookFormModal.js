@@ -16,7 +16,6 @@ class BookFormModal extends Component{
 
     newBookSubmit = (event) => {
       event.preventDefault();
-      console.log(event)
       this.sendNewBook({
         title: event.target.formName.value,
         description: event.target.formDescription.value,
@@ -27,7 +26,6 @@ class BookFormModal extends Component{
 
     sendNewBook = async (newBookSubmit) => {
      await axios.post(apiCall, newBookSubmit)
-     this.props.fetchBooks();
     }
 
   render() {

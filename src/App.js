@@ -24,20 +24,7 @@ class App extends React.Component {
     }
   }
 
-  async appFetchBooks(){
-    let url = `${server}/books`
-    console.log(this.props.user.email);
-    if (this.props.user.email){
-      url += `?email=${this.props.user.email}`
-    } 
-    try {
-      const response = await axios.get(url);
-      console.log(response.data);
-      this.setState({ books: response.data})
-    } catch (error){
-      console.log(error.message)
-    }
-  };
+ 
  
   userHandler = (user) => {
     this.setState({
@@ -58,7 +45,7 @@ class App extends React.Component {
           <Header />
           <Switch>
             {/* Main Route */}
-            <Route exact path="/"> {this.state.user ? ( <BestBooks user={this.state.user} /> ):( <Login user={this.state.user} userHandler={this.userHandler} />)} </Route>
+            <Route exact path="/"> {this.state.user ? ( <BestBooks user={this.state.user} /> ) : ( <Login user={this.state.user} userHandler={this.userHandler} />)} </Route>
             {/* Route to User Books */}
             <Route path="/BestBooks">{this.state.user ?( <BestBooks booksData={this.state.books} /> ):( <Login />)}
             </Route>
