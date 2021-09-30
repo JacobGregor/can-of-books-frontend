@@ -1,9 +1,9 @@
-import React from 'react';
+import { Component } from 'react'
+import LoginButtons from './LoginButton'
 import Card from 'react-bootstrap/Card';
-import LoginButton from './LoginButton'
 
 
-class Login extends React.Component {
+class Login extends Component {
   render() {
     return (
       <Card style={{ width: '18rem' }}>
@@ -12,7 +12,7 @@ class Login extends React.Component {
           <Card.Text>
             Click Below to Log In
           </Card.Text>
-          <LoginButton user={this.props.user}/>
+          <LoginButtons userHandler={this.props.userHandler} />
         </Card.Body>
       </Card>
     )

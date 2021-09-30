@@ -1,21 +1,40 @@
 import { Component } from 'react'
-import Link from 'react-bootstrap/NavLink'
+import LoginForm from './LoginForm'
+import Button from 'react-bootstrap/Button'
 
 
-export default class LoginButton extends Component {
+class LoginButtons extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      show: false,
+    }
+  }
+
+  showHandle = (event) =>{
+    console.log(event)
+      this.setState({
+        show: true
+      })
+      console.log(this.state.show)
+  }
 
   render() {
-    return(
-      <>
-    <Link to="/user">
-    <button  onClick={this.props.onLogIn}>
-    Log In
-    </button>
-    </Link>
-      </>
-    )
-    /* TODO: Render a button with label 'Log In'. When the button is clicked then show LoginForm instead */
+      if(this.state.show){
+        return ( 
+          <>
+        <LoginForm userHandler={this.props.userHandler}/> 
+         </>
+        )
+      } else{
+        return (
+          <>
+          <p>It appears you do not have a profile...</p>
+          <Button onClick={this.showHandle}> Login </Button>
+          </>
+        ) 
+      };
+    };
   }
-}
 
-
+export default LoginButtons
